@@ -1,7 +1,6 @@
 import {
   RECEIVE_PLAYLISTS,
-  RECEIVE_PLAYLIST,
-  RECEIVE_SONGS
+  RECEIVE_PLAYLIST
 } from '../constants';
 
 import {convertSong} from '../utils';

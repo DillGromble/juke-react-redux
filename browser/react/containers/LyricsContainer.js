@@ -1,30 +1,29 @@
 import React, {Component} from 'react';
 import store from '../store';
 import Lyrics from '../components/Lyrics';
+import { connect } from 'react-redux';
 
 import {searchLyrics} from '../action-creators/lyrics';
 
-class LyricsContainer extends Component {
+
+
+const mapStateToProps = state => {
+  return state;
+};
+
+
+class LyricsWrapper extends Component {
 
   constructor() {
-
     super();
-
-    this.state = Object.assign({
+    this.state = {
       artistQuery: '',
       songQuery: ''
-    }, store.getState());
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleArtistInput = this.handleArtistInput.bind(this);
     this.handleSongInput = this.handleSongInput.bind(this);
-
-  }
-
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
-    });
   }
 
   handleArtistInput(artist) {
@@ -42,22 +41,18 @@ class LyricsContainer extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
   render() {
     return (
       <Lyrics
-        {...this.state}
-        handleChange={this.handleChange}
+        {...this.props}
         setArtist={this.handleArtistInput}
         setSong={this.handleSongInput}
         handleSubmit={this.handleSubmit} />
     );
   }
-
 }
 
-export default LyricsContainer;
 
+const LyricsContainer = connect(mapStateToProps)(LyricsWrapper);
+
+export default LyricsContainer;

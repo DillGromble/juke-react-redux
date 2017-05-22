@@ -2,31 +2,28 @@ import React from 'react';
 import AddSong from '../components/AddSong';
 import store from '../store';
 import {loadAllSongs, addSongToPlaylist} from '../action-creators/playlists';
+import { connect } from 'react-redux';
 
-class AddSongContainer extends React.Component {
+
+const mapProps = state => {
+  return state
+}
+
+
+class AddSongConnect extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = Object.assign({
+    this.state = {
       songId: 1,
       error: false
-    }, store.getState());
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-
-    this.unsubscribe = store.subscribe(() => {
-      this.setState(store.getState());
-    });
-
     store.dispatch(loadAllSongs());
-
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
   }
 
   handleChange(evt) {
@@ -37,20 +34,18 @@ class AddSongContainer extends React.Component {
   }
 
   handleSubmit(evt) {
-
     evt.preventDefault();
 
-    const playlistId = this.state.playlists.selected.id;
+    const playlistId = this.props.playlists.selected.id;
     const songId = this.state.songId;
 
     store.dispatch(addSongToPlaylist(playlistId, songId))
       .catch(() => this.setState({ error: true }));
-
   }
 
   render() {
-
-    const songs = this.state.songs;
+    console.log(this.props);
+    const songs = this.props.songs;
     const error = this.state.error;
     const songId = this.state.songId;
 
@@ -61,9 +56,13 @@ class AddSongContainer extends React.Component {
         error={error}
         songId={songId}
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}/>
+        handleSubmit={this.handleSubmit}
+      />
     );
   }
 }
+
+const AddSongContainer = connect(mapProps)(AddSongConnect)
+
 
 export default AddSongContainer;

@@ -1,9 +1,11 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist';
 import store from '../store';
+import { connect } from 'react-redux';
 import {addNewPlaylist} from '../action-creators/playlists';
 
-class NewPlaylistContainer extends React.Component {
+
+class NewPlaylistConnect extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,7 +26,6 @@ class NewPlaylistContainer extends React.Component {
   }
 
   handleSubmit(evt) {
-
     evt.preventDefault();
     store.dispatch(addNewPlaylist(this.state.inputValue));
   }
@@ -49,5 +50,7 @@ class NewPlaylistContainer extends React.Component {
   }
 
 }
+
+const N
 
 export default NewPlaylistContainer;

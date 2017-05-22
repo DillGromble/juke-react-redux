@@ -2,7 +2,7 @@ import React from 'react';
 import Songs from './Songs';
 
 export default function AddSong (props) {
-
+  // console.log(props);
   const songs = props.songs;
   const error = props.error;
   const songId = props.songId;
