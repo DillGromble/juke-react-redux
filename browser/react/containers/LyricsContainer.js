@@ -8,7 +8,9 @@ import {searchLyrics} from '../action-creators/lyrics';
 
 
 const mapStateToProps = state => {
-  return state;
+  return {
+    lyrics: state.lyrics
+  }
 };
 
 
@@ -44,14 +46,13 @@ class LyricsWrapper extends Component {
   render() {
     return (
       <Lyrics
-        {...this.props}
+        lyrics={this.props.lyrics}
         setArtist={this.handleArtistInput}
         setSong={this.handleSongInput}
         handleSubmit={this.handleSubmit} />
     );
   }
 }
-
 
 const LyricsContainer = connect(mapStateToProps)(LyricsWrapper);
 

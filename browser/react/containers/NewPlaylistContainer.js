@@ -1,11 +1,10 @@
 import React from 'react';
 import NewPlaylist from '../components/NewPlaylist';
 import store from '../store';
-import { connect } from 'react-redux';
 import {addNewPlaylist} from '../action-creators/playlists';
 
 
-class NewPlaylistConnect extends React.Component {
+class NewPlaylistContainer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +49,5 @@ class NewPlaylistConnect extends React.Component {
   }
 
 }
-
-const N
 
 export default NewPlaylistContainer;

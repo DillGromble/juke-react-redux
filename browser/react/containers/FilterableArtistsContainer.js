@@ -5,7 +5,9 @@ import Artists from '../components/Artists';
 
 
 const mapStateToProps = state => {
-  return state
+  return {
+    artists: state.artists
+  }
 };
 
 

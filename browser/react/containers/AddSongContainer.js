@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 
 
 const mapProps = state => {
-  return state
+  return {
+    songs: state.songs,
+    playlists: state.playlists
+  }
 }
 
 
@@ -44,7 +47,7 @@ class AddSongConnect extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+
     const songs = this.props.songs;
     const error = this.state.error;
     const songId = this.state.songId;
